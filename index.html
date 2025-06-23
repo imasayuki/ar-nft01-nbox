@@ -3,27 +3,46 @@
   <head>
     <meta charset="utf-8" />
     <title>AR NFT Template</title>
+
     <!-- A-Frame 本体 -->
     <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
-    <!-- AR.js NFT用ビルド -->
+
+    <!-- AR.js（NFTマーカー対応版） -->
     <script src="https://raw.githack.com/AR-js-org/AR.js/3.4.2/aframe/build/aframe-ar-nft.js"></script>
+
+    <!-- image Descriptors読み込み画面のstyle定義 -->  
     <style>
       body { margin: 0; overflow: hidden; }
-      a-scene { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; }
+      a-scene {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100vw;
+        height: 100vh;
+      }
+      .arjs-loader {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        background: black;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2em;
+      }
     </style>
-    
   </head>
+
   <body>
-    <div class="arjs-loader">
-      <div>Loading, please wait...</div>
-    </div>
+    <!--Image Descriptors読み込みまで表示される文字列 -->
+    <div class="arjs-loader">読み込み中...</div>
+
     <a-scene
       vr-mode-ui="enabled: false"
-      renderer="logarithmicDepthBuffer: true"
       embedded
-      arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
-
-      <!-- NFTマーカーのURLにセットを指定 -->
+      renderer="logarithmicDepthBuffer: true"
+      arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+    >
       <a-nft
         type="nft"
         url="assets/N-box"
@@ -33,10 +52,11 @@
         smoothtolerance=".01"
         smooththreshold="5"
       >
-        <a-box position="50 0 0" color="blue" scale="100 100 100"></a-box>
+        <a-box position="0 0 0" color="blue" scale="100 100 100"></a-box>
       </a-nft>
 
       <a-entity camera></a-entity>
     </a-scene>
   </body>
 </html>
+
