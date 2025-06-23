@@ -32,11 +32,11 @@ disable-symlinks = true
 mime-types = [
   { extension = "glb",  type = "model/gltf-binary" },   # GLB形式（バイナリ型の3Dモデル）
   { extension = "gltf", type = "model/gltf+json" },     # GLTF形式（JSON型の3Dモデル）
-  { extension = "fset", type = "application/octet-stream" },
-  { extension = "fset3", type = "application/octet-stream" },
-  { extension = "iset", type = "application/octet-stream" }
+ # --- 以下はAR.jsのNFTマーカーで使われる3種類の専用ファイル形式 ---
+  { extension = "fset",  type = "application/octet-stream" },  # NFT画像の特徴点情報（1段目）
+  { extension = "fset3", type = "application/octet-stream" },  # NFT画像の特徴点情報（3段目、詳細な識別用）
+  { extension = "iset",  type = "application/octet-stream" }   # NFT画像のメタデータ（画像サイズなど）
 ]
-
 [advanced]
 
 # すべてのファイルにキャッシュを無効にする設定を追加
