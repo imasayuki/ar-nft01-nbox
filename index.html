@@ -10,14 +10,13 @@
     <!-- AR.js（NFTマーカー対応版） -->
     <script src="https://raw.githack.com/AR-js-org/AR.js/3.4.2/aframe/build/aframe-ar-nft.js"></script>
 
-    <!-- image Descriptors読み込み画面のstyle定義 -->  
+    <!-- ローディング用のスタイル -->
     <style>
       body { margin: 0; overflow: hidden; }
       a-scene {
         position: absolute;
         top: 0; left: 0;
-        width: 100vw;
-        height: 100vh;
+        width: 100vw; height: 100vh;
       }
       .arjs-loader {
         position: absolute;
@@ -29,14 +28,16 @@
         justify-content: center;
         align-items: center;
         font-size: 1.2em;
+        z-index: 9999;
       }
     </style>
   </head>
 
   <body>
-    <!--Image Descriptors読み込みまで表示される文字列 -->
+    <!-- 読み込み中に表示されるローダー -->
     <div class="arjs-loader">読み込み中...</div>
 
+    <!-- ARマーカー検出＆表示部分 -->
     <a-scene
       vr-mode-ui="enabled: false"
       embedded
@@ -57,6 +58,15 @@
 
       <a-entity camera></a-entity>
     </a-scene>
+
+    <!-- 読み込み完了後にローダーを消す -->
+    <script>
+      window.addEventListener("arjs-nft-loaded", () => {
+        const loader = document.querySelector('.arjs-loader');
+        if (loader) loader.style.display = 'none';
+      });
+    </script>
   </body>
 </html>
+
 
