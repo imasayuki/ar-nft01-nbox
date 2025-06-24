@@ -1,14 +1,14 @@
 [general]
 # Replit上でサーバーを公開するための設定
-host = "0.0.0.0"         # すべてのアクセスを受け付ける（Replitで必要）
-port = 80                # HTTPでよく使うポート番号
+host = "0.0.0.0"
+port = 80
 
 # 公開するファイルの場所（このReplitのプロジェクトの中身すべて）
 root = "./"
 
 # 表示しないログのレベル（"error"ならエラーだけ表示）
 log-level = "error"
-log-remote-address = false  # アクセスしてきた人の情報は表示しない
+log-remote-address = false
 
 # フォルダの中身を一覧表示するか（falseで表示しない）
 directory-listing = false
@@ -22,27 +22,32 @@ cors-allow-origins = "*"
 # 「index.html」がトップページとして開かれるようにする
 index-files = "index.html"
 
-# 「.git」や「.DS_Store」など、隠しファイルを見せない
+# 隠しファイルや特殊なファイルをブロック
 ignore-hidden-files = true
-
-# シンボリックリンクという特殊なファイルを無効にする
 disable-symlinks = true
 
-# ★ 特別なファイル形式（3Dモデル）に正しいタイプを教える
+# MIMEタイプの追加定義（GLTFやNFTマーカー用）
 mime-types = [
-  { extension = "glb",  type = "model/gltf-binary" },   # GLB形式（バイナリ型の3Dモデル）
-  { extension = "gltf", type = "model/gltf+json" },     # GLTF形式（JSON型の3Dモデル）
- # --- 以下はAR.jsのNFTマーカーで使われる3種類の専用ファイル形式 ---
-  { extension = "fset",  type = "application/octet-stream" },  # NFT画像の特徴点情報（1段目）
-  { extension = "fset3", type = "application/octet-stream" },  # NFT画像の特徴点情報（3段目、詳細な識別用）
-  { extension = "iset",  type = "application/octet-stream" }   # NFT画像のメタデータ（画像サイズなど）
+  { extension = "glb",   type = "model/gltf-binary" },
+  { extension = "gltf",  type = "model/gltf+json" },
+  { extension = "fset",  type = "application/octet-stream" },
+  { extension = "fset3", type = "application/octet-stream" },
+  { extension = "iset",  type = "application/octet-stream" }
 ]
+
 [advanced]
 
-# すべてのファイルにキャッシュを無効にする設定を追加
+# すべてのファイルにキャッシュを無効化
 [[advanced.headers]]
-source = "**"   # すべてのファイルに対して
+source = "**"
 [advanced.headers.headers]
 Cache-Control = "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0"
 Pragma = "no-cache"
 Expires = "0"
+
+# /assets/ 以下に対して特別なCORSとContent-Type設定を追加
+[[advanced.headers]]
+source = "/assets/*"
+[advanced.headers.headers]
+Access-Control-Allow-Origin = "*"
+Content-Type = "application/octet-stream"
