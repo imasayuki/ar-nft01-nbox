@@ -7,7 +7,7 @@
     <!-- A-Frame 本体 -->
     <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
 
-    <!-- AR.js（NFTマーカー対応版） -->
+    <!-- AR.js（NFTマーカー対応版） ※CDN読み込みが不安定なためローカル配置 -->
     <script src="./libs/aframe-ar-nft.js"></script>
 
     <!-- ローディング用のスタイル -->
@@ -52,6 +52,7 @@
         smoothcount="10"
         smoothtolerance="0.05"
         smooththreshold="7"
+        id="nft-marker"
       >
         <a-box position="0 0 0" color="blue" scale="100 100 100"></a-box>
       </a-nft>
@@ -59,11 +60,25 @@
       <a-entity camera></a-entity>
     </a-scene>
 
-    <!-- 読み込み完了後にローダーを消す -->
+    <!-- デバッグ用スクリプト -->
     <script>
+      console.log("📦 ページ読み込み完了");
+
+      // AR.js 読み込み完了時
       window.addEventListener("arjs-nft-loaded", () => {
+        console.log("✅ NFT マーカーのデスクリプタ読み込み完了");
         const loader = document.querySelector('.arjs-loader');
         if (loader) loader.style.display = 'none';
+      });
+
+      // マーカー検出ログ
+      const marker = document.querySelector("#nft-marker");
+      marker.addEventListener("markerFound", () => {
+        console.log("📸 NFT マーカーが見つかりました");
+      });
+
+      marker.addEventListener("markerLost", () => {
+        console.log("🔍 NFT マーカーを見失いました");
       });
     </script>
   </body>
