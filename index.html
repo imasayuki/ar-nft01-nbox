@@ -49,12 +49,12 @@
         url="./assets/N-box"
         emitevents="true"
         smooth="true"
-        smoothcount="10"
-        smoothtolerance="0.05"
-        smooththreshold="7"
+        smoothcount="15"
+        smoothtolerance="0.02"
+        smooththreshold="4"
         id="nft-marker"
       >
-        <a-box position="0 0 0" color="blue" scale="100 100 100"></a-box>
+        <a-box position="50 0 -150" color="blue" scale="50 50 50"></a-box>
       </a-nft>
 
       <a-entity camera></a-entity>
@@ -62,11 +62,11 @@
 
     <!-- デバッグ用スクリプト -->
     <script>
-      console.log("📦 ページ読み込み完了");
+      console.log("ページ読み込み完了");
 
       // AR.js 読み込み完了時
       window.addEventListener("arjs-nft-loaded", () => {
-        console.log("✅ NFT マーカーのデスクリプタ読み込み完了");
+        console.log("NFT マーカーのデスクリプタ読み込み完了");
         const loader = document.querySelector('.arjs-loader');
         if (loader) loader.style.display = 'none';
       });
@@ -74,14 +74,12 @@
       // マーカー検出ログ
       const marker = document.querySelector("#nft-marker");
       marker.addEventListener("markerFound", () => {
-        console.log("📸 NFT マーカーが見つかりました");
+        console.log("NFT マーカーが見つかりました");
       });
 
       marker.addEventListener("markerLost", () => {
-        console.log("🔍 NFT マーカーを見失いました");
+        console.log("NFT マーカーを見失いました");
       });
     </script>
   </body>
 </html>
-
-
